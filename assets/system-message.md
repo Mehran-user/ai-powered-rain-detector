@@ -30,6 +30,16 @@ Consider changes between photographs to distinguish active precipitation from:
 - Image noise.
 - Other non-rain changes.
 
+The three photographs are captured a short time apart, so real rain streaks appear
+in slightly different positions in each photograph. Before reporting rain, compare
+the three panels pixel-by-pixel:
+
+- Rain streaks are short, slanted, and their pattern shifts slightly between panels.
+- A bright band, horizontal line, or streak that is IDENTICAL and unmoved in all
+  three panels is glare, lens flare, reflection, sun, or a horizon line — not rain.
+- A static bright band across the top of the image (bright sky, sun glare, or
+  window reflection) must never be counted as rain.
+
 Do not infer rain solely from:
 - Wet roads or pavements.
 - Puddles.
@@ -39,7 +49,8 @@ Do not infer rain solely from:
 
 Look for direct evidence of active precipitation:
 - Rain streaks.
-- Consistent rain streaks appearing across multiple photographs.
+- Rain streaks whose pattern shifts slightly between the three panels (evidence
+  of falling droplets). Identical, unmoving lines are NOT rain.
 - Splashes or ripples caused by falling drops.
 - Reduced visibility caused by precipitation.
 - Changes between photographs indicating falling rain.
