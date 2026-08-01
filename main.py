@@ -54,7 +54,8 @@ Configuration:
                       that need authentication
     model             model identifier reported by the endpoint
     max_tokens        max tokens for the AI response (default: 1024)
-    timeout_seconds   HTTP timeout per AI request (default: 120)
+    timeout_seconds   HTTP timeout per AI request (default: 120);
+                      0 disables the timeout
     retry_attempts    AI retries before failing (default: 3)
 
   camera:

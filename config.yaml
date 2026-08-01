@@ -34,13 +34,15 @@ ai:
 
   max_tokens: 1024           # Max tokens for the AI response. Qwen3 thinking
                              # consumes tokens; keep this generous.
-  timeout_seconds: 120       # HTTP timeout per AI request.
+  timeout_seconds: 0         # HTTP timeout per AI request in seconds.
+                             # 0 (or empty) disables the timeout entirely.
+                             # Note: retry_attempts still applies on failure.
   retry_attempts: 3          # Retries on AI failure.
   backoff_seconds: 2         # Initial retry delay; doubles each attempt.
   max_backoff_seconds: 30    # Cap on the retry delay.
 
 camera:
-  device_index: 0            # OpenCV camera index (/dev/videoN).
+  device_index: 4            # OpenCV camera index (/dev/videoN).
   width: 1920                # Requested frame width (0 = camera default).
   height: 1080               # Requested frame height (0 = camera default).
   led_wait_seconds: 5        # Pause after turning the LED on.

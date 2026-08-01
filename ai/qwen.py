@@ -84,6 +84,7 @@ def send_bytes(base_url, model, image_bytes, system_message, timeout=120,
 
 def _send(base_url, model, image_bytes, system_message, timeout, api_key,
           max_tokens):
+    timeout = timeout if (timeout and timeout > 0) else None
     encoded = base64.b64encode(image_bytes).decode("ascii")
     payload = {
         "model": model,
