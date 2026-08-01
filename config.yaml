@@ -1,0 +1,66 @@
+# AI-Powered Rain Logger configuration.
+# All values below are optional and can be omitted; defaults are shown as the
+# existing values. Paths are relative to this file's directory.
+
+schedule:
+  interval_minutes: 30        # Minutes between captures.
+  start_at: "2026-08-02 00:00:00"   # Local time "YYYY-MM-DD HH:MM:SS".
+                                     # Leave empty ("" or null) to start now.
+  stop_at: "2026-08-09 00:00:00"     # Local time. Leave empty to run until
+                                     # interrupted.
+                                     # Override both with --start-at/--stop-at.
+
+ai:
+  # Which AI backend to use:
+  #   "llama-cpp"      - llama.cpp llama-server on your machine (default).
+  #                      No API key required.
+  #   "openai"         - OpenAI-compatible providers with built-in base URLs:
+  #                      openai, mistral, groq, together, openrouter,
+  #                      fireworks, deepseek.
+  #   "custom"         - Any OpenAI-compatible URL; must set base_url below.
+  provider: "llama-cpp"
+
+  # Endpoint override. Empty = use the provider default (llama-cpp uses
+  # http://127.0.0.1:8080). Required when provider is "custom".
+  base_url: ""
+
+  # Name of an environment variable holding the API key, e.g. "GROQ_API_KEY".
+  # Required (fail-fast at startup) for providers that need authentication.
+  # Leave empty for llama-cpp.
+  api_key_env: ""
+
+  # Model identifier as reported by the endpoint (/v1/models).
+  model: "qwen3-vl-4b"
+
+  max_tokens: 1024           # Max tokens for the AI response. Qwen3 thinking
+                             # consumes tokens; keep this generous.
+  timeout_seconds: 120       # HTTP timeout per AI request.
+  retry_attempts: 3          # Retries on AI failure.
+  backoff_seconds: 2         # Initial retry delay; doubles each attempt.
+  max_backoff_seconds: 30    # Cap on the retry delay.
+
+camera:
+  device_index: 0            # OpenCV camera index (/dev/videoN).
+  width: 1920                # Requested frame width (0 = camera default).
+  height: 1080               # Requested frame height (0 = camera default).
+  led_wait_seconds: 5        # Pause after turning the LED on.
+  shutter_wait_seconds: 1    # Pause between the three captures.
+  separator_width: 20        # Black separator width (px) when stitching.
+
+image:
+  annotated_font_size_pt: 72 # Font size in points for the overlay.
+  dpi: 96                    # Assumed display DPI (converts pt -> px).
+  margin: 24                 # Overlay margin from the image edge (px).
+
+sound:
+  enabled: true              # Play the shutter sound after each capture.
+  volume: 0.8                # 0.0-1.0 playback volume.
+  playback_command: "aplay"  # Linux WAV player ("aplay"/"paplay").
+
+paths:
+  system_message: "assets/system-message.md"   # AI system prompt file.
+  shutter_sound: "assets/camera_snap.wav"      # Shutter sound file.
+  csv_file: "Database/rain_log.csv"            # Observation database.
+  raw_images_dir: "Database/images/raw"        # Stitched raw images.
+  annotated_images_dir: "Database/images/annotated"  # Annotated images.
+  log_file: "logs/system.log"                  # Runtime log.
