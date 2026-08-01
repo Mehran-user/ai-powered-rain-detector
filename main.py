@@ -54,6 +54,10 @@ Configuration:
                       that need authentication
     model             model identifier reported by the endpoint
     max_tokens        max tokens for the AI response (default: 1024)
+    temperature       sampling temperature (default: 0.2); avoid 0.0, it
+                      makes Qwen3 repeat itself
+    frequency_penalty penalize repeated tokens 0.0-2.0 (default: 0.0); raise
+                      to ~0.3 if the model loops on a phrase
     timeout_seconds   HTTP timeout per AI request (default: 120);
                       0 disables the timeout
     retry_attempts    AI retries before failing (default: 3)
@@ -261,6 +265,8 @@ def dry_run(config):
             timeout=config.ai["timeout_seconds"],
             api_key=api_key,
             max_tokens=config.ai.get("max_tokens", 1024),
+            temperature=config.ai.get("temperature", 0.2),
+            frequency_penalty=config.ai.get("frequency_penalty", 0.0),
         )
         logger.info("AI response received.")
         result = parse(text)
@@ -394,6 +400,8 @@ def _capture(label, config, camera, system_message, base_url, api_key, debug,
             timeout=config.ai["timeout_seconds"],
             api_key=api_key,
             max_tokens=config.ai.get("max_tokens", 1024),
+            temperature=config.ai.get("temperature", 0.2),
+            frequency_penalty=config.ai.get("frequency_penalty", 0.0),
         )
         logger.info("AI response received.")
         result = parse(text)

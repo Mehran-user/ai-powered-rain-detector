@@ -34,6 +34,10 @@ ai:
 
   max_tokens: 1024           # Max tokens for the AI response. Qwen3 thinking
                              # consumes tokens; keep this generous.
+  temperature: 0.2           # Sampling temperature. Qwen3 repeats itself at
+                             # 0.0; ~0.2 avoids loops while staying stable.
+  frequency_penalty: 0.3     # Penalizes repeated tokens (0.0-2.0). Raise
+                             # further if the model keeps looping on a phrase.
   timeout_seconds: 0         # HTTP timeout per AI request in seconds.
                              # 0 (or empty) disables the timeout entirely.
                              # Note: retry_attempts still applies on failure.
@@ -43,8 +47,8 @@ ai:
 
 camera:
   device_index: 4            # OpenCV camera index (/dev/videoN).
-  width: 1920                # Requested frame width (0 = camera default).
-  height: 1080               # Requested frame height (0 = camera default).
+  width: 1280                # Requested frame width (0 = camera default).
+  height: 720                # Requested frame height (0 = camera default).
   led_wait_seconds: 5        # Pause after turning the LED on.
   shutter_wait_seconds: 1    # Pause between the three captures.
   separator_width: 20        # Black separator width (px) when stitching.
